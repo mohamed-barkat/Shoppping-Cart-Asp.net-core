@@ -1,0 +1,128 @@
+﻿@using Shop.UI.ViewModel.Users
+@model EditUserViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+  
+
+    
+        <div class="row ">
+   
+    <h2 style="color: #10cab7;" class="justify-content-center d-flex m-2">Edit User </h2>
+    <hr />
+    <div class="col-md-4  ">
+
+        <div class="Register  mt-3">
+            <form id="myform" asp-controller="Administration" asp-action="EditUser" enctype="multipart/form-data">
+            <h4 class=" text-center " style="color: #dc3545;"> Edit @Model.UserName </h4>
+
+           
+                <div asp-validation-summary=All class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label m-1"></label>
+                    <input id="Email" asp-for="Email" class="form-control m-1" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label m-1"></label>
+                    <input id="UserName" asp-for="UserName" class="form-control m-1" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNummber" class="control-label m-1"></label>
+                    <input id="PhoneNummber" asp-for="PhoneNummber" class="form-control m-1" />
+                    <span asp-validation-for="PhoneNummber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label m-1"></label>
+                    <input id="PhoneNummber" asp-for="Password" class="form-control m-1" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                
+
+                <div class="form-check">
+                    <input asp-for="IsEmailConfirmed" class="form-check-input" type="checkbox" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault" asp-for="IsEmailConfirmed">
+                        EmailConfierm
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-danger bg-gradient btn-lg w-100 mt-4 mb-0"
+                        style="background-image: var(--bs-gradient);">Update </button>
+                
+                </div>
+          </form>
+        </div>
+
+    </div>
+    <div class="col-md-3 lin">
+         <a class="btn btn-dark " asp-action="EditAddressForUser" asp-route-userId="@Model.Id"> Mange Address</a>
+    </div>
+    <div class="col-md-3">
+       
+    </div>
+   
+    </div>
+     
+
+
+<div class="row m-3 justify-content-between">
+    <div class="col-md-6">
+        <div class="card text-white bg-danger mb-3">
+            <h2 class="card-header "> Roles</h2>
+            <div class="card-body">
+                @if (Model.Roles.Count == 0)
+                {
+                    <span> No Roles yet</span>
+                }
+                else
+                {
+                    foreach (var role in Model.Roles)
+                    {
+                        <p> @role</p>
+                    }
+                }
+
+
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-light" asp-action="EditRolesInUser" asp-route-userId="@Model.Id">Mange User
+                    Roles</a>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-danger mb-3">
+            <h2 class="card-header"> Claims</h2>
+            <div class="card-body">
+                @if (Model.Claims.Count == 0)
+                {
+                    <span> No Claims yet</span>
+                }
+                else
+                {
+                    foreach (var claim in Model.Claims)
+                    {
+                        if (claim.Value == "true")
+                        {
+                            <p> @claim.Type</p>
+                        }
+
+
+                    }
+                }
+
+
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-light" asp-action="EditUserClaims" asp-route-userId="@Model.Id">Mange User
+                    Claims</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+﻿@using Shop.UI.ViewModel.Address
+@model AddressViewModel
+
+@{
+    var userId = ViewBag.userId;
+    ViewData["Title"] = "EditAddressForUser";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-lg-3">
+        <h2 style="color: #10cab7;" class="justify-content-center d-flex m-2">Edit Address  </h2>
+    <hr />
+        <form method="post" asp-action="EditAddressForUser" >
+             <div class="form-group">
+                    <label asp-for="Country" class="control-label m-1"></label>
+                    <input id="PhoneNummber" asp-for="Country" class="form-control m-1" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="City" class="control-label m-1"></label>
+                    <input id="City" asp-for="City" class="form-control m-1" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="Street" class="control-label m-1"></label>
+                    <input id="PhoneNummber" asp-for="Street" class="form-control m-1" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label m-1"></label>
+                    <input id="PhoneNummber" asp-for="PostalCode" class="form-control m-1" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+                 <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-danger bg-gradient btn-lg w-100 mt-4 mb-0"
+                        style="background-image: var(--bs-gradient);">Update </button>
+                 <a class="btn btn-link m-3 btn-lg" asp-action="EditUser" asp-route-userId="@Model.UserId">Back</a>
+                <input type="hidden" asp-for="AddressId" />
+                <input type="hidden" asp-for="@userId" />
+                </div>
+              
+        </form>
+
+
+
+    </div>
+
+
+</div>

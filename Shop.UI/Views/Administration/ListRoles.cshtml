@@ -1,0 +1,53 @@
+﻿@using Shop.Domain.Models
+@model List<RoleViewModel>
+@inject UserManager<ApplicationUser> usermanger
+@{
+
+    ViewData["Title"] = "Roles";
+}
+
+  <h2 class="text-center mytitle m-3"> Roles</h2>
+  <div class="d-flex justify-content-end">
+   <a class=" btn btn-outline-primary create" asp-action="CreateNewRole">Create New Role</a>
+  </div>
+ 
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Role Name</th>
+   
+      <th scope="col">Users Count </th>
+      <th class="d-flex justify-content-center" scope="col"> Operations </th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var role in Model)
+        {
+            <tr>
+      <th scope="row">1</th>
+      <td>@role.RoleName</td>
+  
+      <td>
+          @{
+            var result= await usermanger.GetUsersInRoleAsync(role.RoleName);
+            
+          }
+         @result.Count
+          
+      </td>
+      <td class="d-flex justify-content-around">
+          <a class="btn btn-primary" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+          <form asp-action="DeleteRole" method="post">
+          <input type="hidden" name="Id" value="@role.Id" />
+              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you Sure ?')"> Delete</button>
+          
+          </form>
+      </td>
+    </tr> 
+
+        }
+       
+    
+  </tbody>
+</table>

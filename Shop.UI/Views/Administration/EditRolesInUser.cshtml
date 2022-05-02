@@ -1,0 +1,45 @@
+﻿@using Shop.Domain.Models
+@using Shop.UI.ViewModel.Roles
+@model List<EditRolesInUserViewModel>
+
+@{
+    ViewData["Title"] = "EditRolesInUser";
+       var userId = ViewBag.userId;
+}
+
+
+
+<div class="row m-3">
+    <div class="col-md-12">
+           <form asp-controller="administration" asp-action="EditRolesInUser" method="post"  asp-route-userId="@userId">
+        <div class=card>
+            <div class="card-header">
+               <h5 class="card-header-pills">Add or Remove Roles from this User</h5>
+            </div>
+             <div class="card-body">
+              
+                     <input   asp-for="@userId" type="hidden" >
+                   @for(int i=0; i<Model.Count; i++)
+                   {
+                    <div class="form-check">
+                       <input   asp-for="@Model[i].RoleName" type="hidden" >
+                        <input   asp-for="@Model[i].RoleId" type="hidden" >
+                       <input class="form-check-input"  asp-for="@Model[i].IsSelected" type="checkbox" >
+                      <label class="form-check-label"  asp-for="@Model[i].IsSelected">
+                        @Model[i].RoleName
+                          </label>
+                         </div>
+                     }
+                 </div>
+              <div class=card-footer>
+               <input value="Update" type="submit"  class="btn btn-primary"  />
+              <a asp-action="EditUser" asp-route-userId="@userId"  class="btn btn-outline-primary" >Back To List</a>
+              </div>
+                 </div>
+               </form>
+               </div>
+        </div>
+         
+
+     
+        

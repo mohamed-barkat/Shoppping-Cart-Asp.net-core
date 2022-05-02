@@ -1,0 +1,90 @@
+﻿@using Shop.UI.ViewModel.Users
+@model UsersViewModel
+@{
+
+    ViewData["Titel"] = "CreateNewUser";
+}
+
+
+<div class="row ">
+    <div class="col-md-6  offset-lg-3 ">
+        <div class="Register  mt-3">
+             <h2 style="color: #10cab7;" class="justify-content-center d-flex">Create New User </h2>
+                  <hr />     
+         <form  asp-controller="Administration" asp-action="CreateNewUser" enctype="multipart/form-data">
+            <div asp-validation-summary=All  class="text-danger"></div>
+      
+            <div class="form-group">
+                <label asp-for="Email" class="control-label m-1"></label>
+                <input id="Email" asp-for="Email" class="form-control m-1" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="UserName" class="control-label m-1"></label>
+                <input id="UserName" asp-for="UserName" class="form-control m-1" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+             
+           <div class="form-group">
+               <label asp-for="Password" class="control-label m-1"></label>
+               <span id="Eye" class="" ><i class="fa-solid fa-eye"></i></span>
+               <span id="eye-slash" class="none"><i class="fa-solid fa-eye-slash"></i></span>
+               <input type="password" id="Password" asp-for="Password" class="form-control m-1" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label m-1"></label>
+                <input type="password" id="ConfirmPassword" asp-for="ConfirmPassword" class="form-control m-1" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+              
+             <div class="text-center">
+                      <button type="submit" class="btn btn-lg btn-danger bg-gradient btn-lg w-100 mt-4 mb-0" style="background-image: var(--bs-gradient);">Create </button>
+        </div>
+        </form>
+        </div>
+           
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+    var eye=$('#Eye');
+    var eyeSlash=$('#eye-slash');
+    var password=$('#Password');
+   
+    
+    
+    eye.on('click',function (){
+        password.attr('type','text');
+        if (eye.hasClass('none'))
+            {
+                eye.removeClass('none');
+                eyeSlash.addClass('none');
+            }
+        else {
+            
+            eye.addClass('none');
+            eyeSlash.removeClass('none');
+        }
+    });
+    
+   eyeSlash.on('click',function (){
+       password.attr('type','password');
+       if (eyeSlash.hasClass('none'))
+                  {
+                      eyeSlash.removeClass('none');
+                      eye.addClass('none');
+                  }
+              else {
+                  
+                  eyeSlash.addClass('none');
+                  eye.removeClass('none');
+              }
+       
+   });
+    
+    </script>
+}

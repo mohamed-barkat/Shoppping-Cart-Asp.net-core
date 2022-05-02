@@ -1,0 +1,142 @@
+:root {
+    --main-color: #19283f;
+    --secondary-color: #10cab7;
+    --counter-color: #f08804;
+    --section-padding: 60px;
+    --section-background: #f6f6f6;
+    --main-duration: 0.5s;
+}
+/* End Variables */
+/* Start Global Rules */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Work Sans", sans-serif;
+    background-color: #e9e9e9;
+}
+/*Start Navbar*/
+.navbar{
+    background-color:var(--main-color);
+}
+    .navbar .navbar-nav .nav-link {
+        color: #eee;
+       
+    }
+    .navbar .navbar-nav .nav-link.active,
+    .navbar .navbar-nav .nav-link:hover,
+    .navbar .navbar-nav .nav-link:focus{
+        color:var(--secondary-color);
+    }
+    .navbar-brand img {
+        width: 90px;
+        padding: 5px;
+    }
+.navbar .navbar-toggler{
+
+    color:#eee;
+    font-size:25px;
+    border-color:#eee;
+}
+.navbar .navbar-toggler:focus{
+    box-shadow:none;
+}
+    .navbar .navbar-toggler[ aria-expanded="true"]{
+
+        border-color:var(--secondary-color);
+    }
+
+
+
+/*End Navbar*/
+/*Start Register*/
+/*@media (min-width: 992px) {
+    .Register {
+        margin-top: 25px;
+        width: 720px;
+        position: absolute;
+        left: 600px;
+    }
+}*/
+/* Large */
+/*End Register*/
+.cart {
+    position: absolute;
+    right: 20px;
+    top: -20px;
+    font-size: 27px;
+    cursor: pointer;
+}
+}
+
+.mytitle {
+    background-color: #1f9488;
+    padding: 20px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+.line::after {
+    content:"";
+   
+    border: 6px solid;
+    border-color: #f2f2f2;
+}
+.create {
+    height: 40px;
+    color: #000000;
+    border-color: #000000;
+    border-radius: 20px;
+    margin: 0px;
+}
+.ce {
+    height: 60px;
+    padding:0px;
+    margin:0px;
+
+}
+.lin {
+    border-left: 1px solid;
+    border-color: #2125295c;
+    margin: 40px;
+}
+.CartContainer {
+    margin-top: 100px;
+    margin-left: 28px;
+    border: 1px solid #eee;
+    height: 200px;
+    overflow: hidden;
+    background-color: #00000045;
+    color: #034660;
+
+}
+
+.CartTitle {
+    color: #a90c0c;
+    margin-top: 15px;
+}
+.CartContent {
+    padding: 20px;
+    font-size: 18px;
+}
+.Qunt {
+    width: 60px;
+    padding: 10px;
+    position: absolute;
+    z-index: 100;
+    width: 80px;
+    left: 95px;
+}
+ .none{
+     
+     display: none;
+ }
+ .block{
+     display: block;
+ }

@@ -1,0 +1,106 @@
+﻿@using Shop.Domain.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> signUser
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Shop.UI</title>
+    <link href="~/css/normalize.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;1,700&display=swap" rel="stylesheet">
+
+    <link href="~/css/site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- Start Header -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand " href="#"><img src="~/images/logo.png" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <input id="userName" type="hidden" value="@User.Identity.Name" />
+
+            <div class="collapse navbar-collapse" id="main">
+                <ul class="navbar-nav ms-0 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link p-2 p-lg-3 active" aria-current="page" asp-controller="Home" asp-action="index">Home</a>
+                    </li>
+                    @if (signUser.IsSignedIn(User) && (await authorizationService.AuthorizeAsync(User, "Admin-Panel")).Succeeded)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link  p-2  p-lg-3" asp-controller="Administration" asp-action="Index">Admin</a>
+                        </li>
+
+                    }
+
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li style="position:absolute;top:22px">
+                            <a class="nav-link p-2 p-lg-3 cart " asp-controller="Cart" asp-action="Index"><i class="fa-solid fa-cart-flatbed"></i></a>
+                            <span id="cartCounterSession" style="color:red;position: absolute;
+                               right: 74px;
+                               bottom: -11px;"></span>
+                        </li>
+
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li style="position:relative">
+                            <a class="nav-link p-2 p-lg-3 cart " asp-controller="Cart" asp-action="Index"><i class="fa-solid fa-cart-flatbed"></i></a>
+                            <span id="cartCounterdatabase" style="color:red;position: absolute;
+                               right: 74px;
+                               bottom: 15px;">1</span>
+                        </li>
+                        <form method="post" asp-controller="Account" asp-action="Logout">
+                            <button type="submit" class="btn link-danger nav-link py-0">Logout @User.Identity.Name</button>
+                        </form>
+
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link p-2 p-lg-3 " aria-current="page" asp-action="Login" asp-controller="Account">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  p-2  p-lg-3" asp-action="Register" asp-controller="Account">Register</a>
+                        </li>
+                    }
+
+                </ul>
+
+
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container">
+
+        @RenderBody()
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="~/lib/fontawesome/js/all.min.js"></script>
+    <script src="~/js/Cart/cartCounter.js"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

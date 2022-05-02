@@ -1,0 +1,119 @@
+﻿@using Shop.Application.Contracts
+@using Shop.UI.Paginated
+@model PaginatedList<ProductsViewModel>
+
+@inject ICategoryRepository categoryRepo;
+@{
+
+    var categories = await categoryRepo.GetAllAsync();
+    ViewData["Title"] = "Product List";
+}
+
+
+<div class="row">
+    <h2 class="text-center mytitle m-3"> Products</h2>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color d-flex justify-content-around ">
+            <p>
+                Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+
+
+            <a class=" btn btn-outline-primary create" asp-action="Create">Create New Product</a>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <table class="table mytable  table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"> <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"> Name</a></th>
+
+                <th scope="col"> Price</th>
+                <th scope="col">Photo</th>
+                <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">CraeatedAt</a></th>
+                <th scope="col">Categories </th>
+                <th scope="col" class="d-flex justify-content-center"> Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@product.Name</td>
+
+                    <td>@product.Price</td>
+                    <td><img src="~/ProductsImages/@product.ImageUrl" class="img-thumbnail img-responsive" style="height:80px;width:80px" /></td>
+                    <td>@product.CreatedAt</td>
+                    <td>
+                        @{
+                            var max = product.CategoriesNames.Count - 1;
+                        }
+                        @for (int i = 0; i < @product.CategoriesNames.Count; i++)
+                        {
+                            if (@i == @max)
+                            {
+                                <span>@product.CategoriesNames[i]</span>
+                            }
+                            else
+                            {
+                                <span>@product.CategoriesNames[i] ||</span>
+                            }
+
+
+                        }
+
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-between  align-items-center align-content-center">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@product.Id" asp-route-pageIndex="@Model.PageIndex">Edit  </a>
+                            <a asp-action="Show" asp-route-id="@product.Id" class="btn btn-success">Details</a>
+                            <form asp-action="Delete" asp-route-pageIndex="@Model.PageIndex">
+                                <input type="hidden" name="id" value="@product.Id" /><button id="Delete" type="submit" onclick="return confirm('Are you sure want delete @product.Name ')" class=" btn btn-danger d-inline"> Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+
+
+    @section scripts{
+
+    <script src="~/js/DeleteCategory.js"></script>
+
+
+    }
+</div>
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+

@@ -1,0 +1,23 @@
+﻿
+@model RoleViewModel
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<div class="m-3" >
+    <h2 class="text-center mytitle"> Edit New Role</h2>
+    <form method="post" asp-action="EditRole">
+            <div asp-validation-summary=All  class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="RoleName" class="control-label m-1"></label>
+            <input  asp-for="RoleName" class="form-control" m-1 />
+            <span class="text-danger" asp-validation-for="RoleName"></span>
+            <span></span>
+        </div>
+        <div class="text-center d-flex  justify-content-around m-3 ">
+            <button type="submit" class="btn btn-danger bg-gradient btn-lg " style="background-image: var(--bs-gradient);">Update </button>
+            <a class="btn btn-outline-info"asp-action="ListRoles"> Back To List</a>
+        </div>
+    </form>
+
+</div>

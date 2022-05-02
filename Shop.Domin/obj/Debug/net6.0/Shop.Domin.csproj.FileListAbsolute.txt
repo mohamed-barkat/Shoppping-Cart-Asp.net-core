@@ -1,0 +1,14 @@
+E:\Projects\Shop\Shop.Domin\bin\Debug\net6.0\Shop.Domin.deps.json
+E:\Projects\Shop\Shop.Domin\bin\Debug\net6.0\Shop.Domin.runtimeconfig.json
+E:\Projects\Shop\Shop.Domin\bin\Debug\net6.0\Shop.Domin.dll
+E:\Projects\Shop\Shop.Domin\bin\Debug\net6.0\Shop.Domin.pdb
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.csproj.AssemblyReference.cache
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.AssemblyInfoInputs.cache
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.AssemblyInfo.cs
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.csproj.CoreCompileInputs.cache
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.dll
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\refint\Shop.Domin.dll
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.pdb
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\Shop.Domin.genruntimeconfig.cache
+E:\Projects\Shop\Shop.Domin\obj\Debug\net6.0\ref\Shop.Domin.dll

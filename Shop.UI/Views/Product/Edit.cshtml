@@ -1,0 +1,96 @@
+﻿@model EditProductViewModel
+
+@{
+
+    ViewData["Title"] = "Edit Product";
+}
+ <h2 class="text-center m-3 alert mytitle"> Edit Product</h2>
+<div class="row">
+    <div class="col-md-7">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" asp-route-pageIndex="@ViewBag.PageIndex">
+            <div asp-validation-summary=All  class="text-danger"></div>
+                 <div class="text-danger">@ViewData["message"]</div>
+            
+
+     <div class="form-group">
+                <label asp-for="Name" class="control-label m-1"> Category Name</label>
+                <input   asp-for="Name" id="NameProduct" class="form-control m-1" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+             <input type="hidden" asp-for="Id"  id="productId" />
+              <input type="hidden" asp-for="ImageUrl" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label m-1"> Description</label>
+                <textarea type="text" asp-for="Description" class="form-control m-1" ></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+               <div class="form-group">
+                <label asp-for="Price" class="control-label m-1"> Description</label>
+                <textarea type="text" asp-for="Price" class="form-control m-1" ></textarea>
+                <span asp-validation-for="Price" class="text-danger"></span>
+                
+            </div>
+             <div class="form-group m-3">
+                <label asp-for="Files" class="control-label m-1" > Photo</label>
+                <input type="file" asp-for="Files" class="form-control m-1"  multiple>
+                <span asp-validation-for="Files" class="text-danger"></span>
+            </div>
+
+
+
+    
+
+        <div class="form-group m-3">
+           <input type="text" id="term" />
+                   
+              <label  class="control-label m-1"> Categories</label>
+              <select name="selectCategory"    class="form-select" multiple id="select"> 
+                   <option selected value="1" >Choose...</option>
+                    
+                </select>
+                    </div>
+                  
+        <div id="Paginated">
+            <a  id="Previous"
+   
+            
+  
+                 class="btn btn-default">
+               Previous
+           </a>
+         <a  id="Next"
+   
+         class="btn btn-default ">
+        Next
+       </a>
+
+        </div>
+
+          <div class="form-group mt-3 ">
+                 <button type="submit" class="btn btn-primary m-3"> Update</button>
+                 <a class="btn btn-light" asp-action="Index"><i class="fa-solid fa-angles-left"></i>  Back</a>
+            </div>
+        </form>
+    </div>
+        <div class="col-md-5">
+            <div class="m-3 text-center d-flex justify-content-center align-content-center align-items-center">
+                            <img src="~/ProductsImages/@Model.ImageUrl" style="height:100px;width:100px" class="img-thumbnail" />
+            </div>
+
+        </div>
+
+    </div>
+
+      
+
+
+
+
+   
+       
+     @section Scripts{ 
+   
+      <script src="~/js/Products/EditProduct.js"></script>
+  
+}
+

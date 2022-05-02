@@ -1,0 +1,93 @@
+﻿@using Shop.Domain.Models
+@using Shop.UI.Paginated
+@using Shop.UI.ViewModel.Users
+
+
+@model PaginatedList<UsersViewModel>
+@{
+
+    ViewData["Title"] = "Admin Page ";
+}
+
+   <h2 style="color: #10cab7;" class="justify-content-center d-flex m-2"> Users </h2>
+    <hr />
+        <form asp-action="Index" method="get">
+    <div class="form-actions no-color d-flex justify-content-around ">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+        <a class=" btn btn-outline-primary create" asp-action="CreateNewUser">Create New User</a>
+    </div>
+</form>
+
+      <table class="table mytable  table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"> User Name</a></th>
+
+      <th scope="col"> Email</th>
+       <th scope="col"> Roles</th>
+       
+      <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Craeted At</a></th>
+      <th scope="col" class="d-flex justify-content-center"> Operation</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var user in Model)
+        {
+            
+                <tr>
+                <th scope="row">1</th>
+                <td>@user.UserName</td>
+           
+                <td>@user.Email</td>
+                  <td>
+                      @if(user.Roles.Count<=0)
+                    {
+                        <span> No Roles yet</span>
+                    }
+                    else
+                    {
+                          @foreach(var role in user.Roles)
+                    {
+                        <span>@role</span>
+                    }
+                    }
+                  
+                </td>
+               
+                <td>@user.CraetedAt</td>
+                <td class="d-flex justify-content-around "> <a class="btn btn-primary" asp-action="EditUser" asp-route-userId="@user.Id">Edit  </a>
+                   <a asp-action="DetailsUser" asp-route-userId="@user.Id" class="btn btn-success">Details</a>
+                <form asp-action="DeleteUser" asp-controller="Administration" >
+                     <input type="hidden" name="id" value="@user.Id" /><button id="Delete"  type="submit" onclick="return confirm('Are you sure want delete @user.UserName ')" class=" btn btn-danger d-inline" > Delete</button>   </form> </td>
+               </tr>
+        }
+    
+  
+  </tbody>
+</table>
+ 
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+        

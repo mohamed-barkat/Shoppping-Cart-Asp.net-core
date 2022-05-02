@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "LoginByNuumber";
+}
+
+
+<form asp-action="LoginBynummber" method="post">
+    <div class="form-group m-3">
+
+        <label class="form-label">Email</label>
+      
+        <input type="email" class="form-control" name="email" />
+          @if(TempData["Email"]!=null)
+        {
+            <span class="text-danger"> InvalidEmail</span>
+        }
+    </div>
+ 
+    <button type="submit" class="btn btn-primary m-3">Send</button>
+
+</form>

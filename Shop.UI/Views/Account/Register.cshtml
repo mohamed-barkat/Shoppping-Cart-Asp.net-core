@@ -1,0 +1,176 @@
+﻿
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="row ">
+    <div class="col-md-6  offset-lg-3 ">
+        <div class="Register  mt-3">
+            <h2 style="color: #10cab7;" class="justify-content-center d-flex">Register </h2>
+            <hr />     
+            <form  asp-controller="account" asp-action="register" enctype="multipart/form-data">
+                <div asp-validation-summary=All  class="text-danger"></div>
+      
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label m-1"></label>
+                    <input id="Email" asp-for="Email" class="form-control m-1" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label m-1"></label>
+                    <input id="UserName" asp-for="UserName" class="form-control m-1" />
+                    <span asp-validation-for="UserName" class="text-danger" id="spanusername"></span>
+                </div>
+             
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label m-1"></label>
+                     <span id="Eye" class="" ><i class="fa-solid fa-eye"></i></span>
+                                   <span id="eye-slash" class="none"><i class="fa-solid fa-eye-slash"></i></span>
+                    <input type="password" id="Password" asp-for="Password" class="form-control m-1" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label m-1"></label>
+                    <input type="password" id="ConfirmPassword" asp-for="ConfirmPassword" class="form-control m-1" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger" id="spanConfirm"></span>
+                </div>
+              
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-danger bg-gradient btn-lg w-100 mt-4 mb-0" style="background-image: var(--bs-gradient);">Sign Up</button>
+                </div>
+                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                    <p class="mb-2 text-sm mx-auto">
+                        Already have an account?
+                        <a  asp-action="Login" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+           
+    </div>
+</div>
+@section Scripts
+{
+
+    <script type="text/javascript">
+    $(document).ready(function (){
+   
+        $('#ConfirmPassword').on('keyup',function (){
+               let password=$('#Password').val();
+               let confirm=$('#ConfirmPassword').val();
+               if (password!==confirm)
+                   {
+                     $('#spanConfirm').html('the password and confirm password not too match');
+                       }
+               else {
+              $('#spanConfirm').html('');
+               }
+            
+        });
+        
+        
+        });
+    
+    </script>
+     <script type="text/javascript">
+        var eye=$('#Eye');
+        var eyeSlash=$('#eye-slash');
+        var password=$('#Password');
+       
+        
+        
+        eye.on('click',function (){
+            password.attr('type','text');
+            if (eye.hasClass('none'))
+                {
+                    eye.removeClass('none');
+                    eyeSlash.addClass('none');
+                }
+            else {
+                
+                eye.addClass('none');
+                eyeSlash.removeClass('none');
+            }
+        });
+        
+       eyeSlash.on('click',function (){
+           password.attr('type','password');
+           if (eyeSlash.hasClass('none'))
+                      {
+                          eyeSlash.removeClass('none');
+                          eye.addClass('none');
+                      }
+                  else {
+                      
+                      eyeSlash.addClass('none');
+                      eye.removeClass('none');
+                  }
+           
+       });
+     
+   
+        </script>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+        
+          var username=$('#UserName');
+           username.keyup(function(){
+               if(username.val().length>=3)
+               {
+                   
+          var usernameval=username.val();
+      
+              $.ajax({
+                  url:"/Account/isusernameinuse",
+                  method:'post',
+              timeout: 500,
+            data: {
+           username:username.val()
+           },
+        success: function(data){
+            console.log(data);
+            if(data.success==true)
+            {
+                  $('#spanusername').text('user name is already in use').addClass('text-danger')
+                  .append("<div> valid UserName: <a id='ac'>"+data.userNameValid+"</a> </div>");
+                  $('#ac').css({
+                      'color':'green',
+                      'cursor':'pointer'
+                  });
+                  $('#ac').click(function(){
+
+                     $('#UserName').val($(this).text());
+                       $('#spanusername').html('');
+                  });
+            }
+            else{
+                    $('#spanusername').text('user name is valid').css({
+                        'color':'green'
+                    }).removeClass('text-danger');
+
+            }
+          
+           
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+            // error callback
+            $("p").append("Error: " + errorMessage);
+        },
+    });
+
+               }
+
+           
+          
+
+       });
+        
+        
+        
+        
+        });
+        
+        </script>
+}
+

@@ -1,0 +1,133 @@
+﻿@using Shop.UI.ViewModel.Users
+@model DetailsUserViewModel
+@{
+
+    ViewData["Title"] = "Deatails User";
+}
+
+
+<div>
+    
+  <h4 class="text-center mytitle m-3">User Deatails</h4>
+          <hr />
+    <dl class="row">
+        
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-8 ce">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-8 ce">
+           @if(@Model.UserName==null)
+           {
+             <span>___</span>
+           }
+           else{
+               @Model.UserName
+           }
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-8 ce">
+           @if(@Model.Email==null)
+           {
+             <span>___</span>
+           }
+           else{
+               @Model.Email
+           }
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.CraetedAt)
+        </dt>
+        <dd class="col-8 ce">
+            @Html.DisplayFor(model => model.CraetedAt)
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.PhoneNummber)
+        </dt>
+        <dd class="col-8 ce">
+           @if(@Model.PhoneNummber==null)
+           {
+             <span>___</span>
+           }
+           else{
+               @Model.PhoneNummber
+           }
+
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.Claims)
+        </dt>
+        <dd class="col-8 ce">
+            @if(Model.Claims.Count==0)
+            {
+                <span>___</span>
+            }
+            else
+            {
+                  @foreach(var claim in Model.Claims)
+            {
+                if(claim.Value =="true")
+                {
+                    <span>@claim.Type</span><span>  ||  </span>
+                }
+            }
+            }
+         
+        </dd>
+        <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.Roles)
+        </dt>
+        <dd class="col-8 ce">
+            @if(@Model.Roles.Count!=0)
+            {
+                 @foreach(var role in Model.Roles)
+                 {
+                <span>@role</span><span>  ||  </span>
+                }
+            }
+            else{
+                       <span>___</span>
+            }
+         
+
+        </dd>
+       
+           <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.address)
+          </dt>
+        <dd class="col-8 ce">
+            @if(Model.address!=null)
+            {
+          <span>City : </span>       @Model.address.City <span>|</span>
+         <span>Country : </span>  @Model.address.Country<span>|</span>
+         <span>Street : </span>  @Model.address.Street<span>|</span>
+                <span>PostalCode : </span>    @Model.address.PostalCode<span>|</span>
+            }
+            else
+            {
+                <span>___</span>
+            }
+        </dd>
+             <dt class="col-4 ce">
+            @Html.DisplayNameFor(model => model.CartId)
+        </dt>
+        <dd class="col-8 ce">
+            
+            <span>@Model.CartId</span>
+         
+
+        </dd>
+       
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "EditUser", new {userId = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

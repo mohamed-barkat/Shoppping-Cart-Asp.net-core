@@ -1,0 +1,15 @@
+E:\Projects\Shop\Shop.Application\bin\Debug\net6.0\Shop.Application.deps.json
+E:\Projects\Shop\Shop.Application\bin\Debug\net6.0\Shop.Application.dll
+E:\Projects\Shop\Shop.Application\bin\Debug\net6.0\Shop.Application.pdb
+E:\Projects\Shop\Shop.Application\bin\Debug\net6.0\Shop.Domin.dll
+E:\Projects\Shop\Shop.Application\bin\Debug\net6.0\Shop.Domin.pdb
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.csproj.AssemblyReference.cache
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.AssemblyInfoInputs.cache
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.AssemblyInfo.cs
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.csproj.CoreCompileInputs.cache
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.csproj.CopyComplete
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.dll
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\refint\Shop.Application.dll
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\Shop.Application.pdb
+E:\Projects\Shop\Shop.Application\obj\Debug\net6.0\ref\Shop.Application.dll
